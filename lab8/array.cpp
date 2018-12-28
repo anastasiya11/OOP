@@ -14,11 +14,9 @@ void TArray<T>::QSort(int l, int r)
 	}
 	double x = array[(l + r) / 2].GetItemValue()->Square();
 	std::cout << "X is " << x << "\n";
-	//çàïèñü ýêâèâàëåíòíà (l+r)/2, 
-	//íî íå âûçââàåò ïåðåïîëíåíèÿ íà áîëüøèõ äàííûõ
+
 	int i = l;
 	int j = r;
-	//êîä â while îáû÷íî âûíîñÿò â ïðîöåäóðó particle
 	while (i <= j)
 	{
 		while (array[i].GetItemValue() != nullptr && array[i].GetItemValue()->Square() < x && i < Size()) i++;
@@ -50,11 +48,8 @@ void TArray<T>::MQSort(int l, int r)
 	}
 	double x = array[(l + r) / 2].GetItemValue()->Square();
 	std::cout << "X is " << x << "\n";
-	//çàïèñü ýêâèâàëåíòíà (l+r)/2, 
-	//íî íå âûçââàåò ïåðåïîëíåíèÿ íà áîëüøèõ äàííûõ
 	int i = l;
 	int j = r;
-	//êîä â while îáû÷íî âûíîñÿò â ïðîöåäóðó particle
 	while (i <= j)
 	{
 		while (array[i].GetItemValue() != nullptr && array[i].GetItemValue()->Square() < x && i < Size()) i++;
