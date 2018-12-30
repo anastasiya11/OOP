@@ -104,10 +104,10 @@ int TArray<T>::Size()
 }
 
 template<class T>
-void Vector<T>::print()
+void Vector<T>::Print()
 {
 	for (int i = 0; i < size; i++) {
-		array[i]->print();
+		array[i]->Print();
 	}
 }
 
