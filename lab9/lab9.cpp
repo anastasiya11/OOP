@@ -35,7 +35,7 @@ int main()
 	};
 
 	command removeIfEqualN = [&]() {
-		if (arrRect.empty()) {
+		if (arrRect.Size()==0) {
 			std::cout << "Array is empty" << std::endl;
 
 		}
@@ -52,7 +52,7 @@ int main()
 	btrCmd.push(std::shared_ptr<command>(&removeIfEqualN, [](command*) {}));
 	btrCmd.push(std::shared_ptr<command>(&cmdPrint, [](command*) {}));
 
-	while (!btrCmd.empty()) {
+	while (btrCmd.Size()>0) {
 		std::shared_ptr<command> cmd = btrCmd.remove(0);
 		std::future<void> ft = std::async(*cmd);
 		ft.get();
