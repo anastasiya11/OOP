@@ -1,47 +1,42 @@
-#include "stdafx.h"
 #include "TAllocationBlock.h"
-
-TAllocationBlock::TAllocationBlock(size_t size, size_t count) : size(size), count(count)
-{
-	usedBlocks = (char*)malloc(size* count);
-	freeBlocks = (void**)malloc(sizeof(void*)*count);
-
-	for (size_t i = 0; i < count; ++i)
-		freeBlocks[i] = usedBlocks + i * size;
-	freeCount = count;
+#include <iostream>
+TAllocationBlock::TAllocationBlock(size_t size, size_t count) :
+	_size(size), _count(count) {
+	_used_blocks = (char*)malloc(_size*_count);
+	_free_blocks = (void**)malloc(sizeof(void*)*_count);
+	for (size_t i = 0; i<_count; i++) _free_blocks[i] = _used_blocks + i*_size;
+	_free_count = _count;
+	std::cout << "TAllocationBlock: Memory init" << std::endl;
 }
-
-void * TAllocationBlock::allocate()
-{
+void *TAllocationBlock::allocate() {
 	void *result = nullptr;
-	
-	if (freeCount > 0) {
-		result = freeBlocks[freeCount - 1];
-		freeCount--;
+	if (_free_count>0)
+	{
+		result = _free_blocks[_free_count - 1];
+		_free_count--;
+		std::cout << "TAllocationBlock: Allocate " << (_count - _free_count) <<
+			" of " << _count << std::endl;
 	}
-	else {
-		std::cout << "TAllocationBlock: No memory exception" << std::endl;
+	else
+	{
+		std::cout << "TAllocationBlock: No memory exception : -)" <<
+			std::endl;
 	}
 	return result;
 }
-
-void TAllocationBlock:: deallocate(void * pointer)
-{
-	freeBlocks[freeCount] = pointer;
-	freeCount++;
+void TAllocationBlock::deallocate(void *pointer) {
+	std::cout << "TAllocationBlock: Deallocate block " << std::endl;
+	_free_blocks[_free_count] = pointer;
+	_free_count++;
 }
-
-bool TAllocationBlock::hasFreeBlocks()
-{
-	return freeCount > 0;
+bool TAllocationBlock::has_free_blocks() {
+	return _free_count>0;
 }
-
-TAllocationBlock::~TAllocationBlock()
-{
-	if (freeCount < count)
-		std::cout << "Memory leak?" << std::endl;
-	else
-		std::cout << "Memory freed" << std::endl;
-	delete freeBlocks;
-	delete usedBlocks;
+TAllocationBlock::~TAllocationBlock() {
+	if (_free_count<_count) std::cout << "TAllocationBlock: Memory leak?" <<
+		std::endl;
+	else std::cout << "TAllocationBlock: Memory freed" <<
+		std::endl;
+	delete _free_blocks;
+	delete _used_blocks;
 }
