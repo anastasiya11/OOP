@@ -103,6 +103,14 @@ int TArray<T>::Size()
 	return size;
 }
 
+template<class T>
+void Vector<T>::print()
+{
+	for (int i = 0; i < size; i++) {
+		array[i]->print();
+	}
+}
+
 
 template<class T>
 size_t TArray<T>::ElementInsert(TArrayItem<T> * obj, size_t index)
