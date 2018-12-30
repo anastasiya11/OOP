@@ -31,7 +31,7 @@ int main()
 
 	command cmdPrint = [&]() {
 		std::cout << "Printing array" << std::endl;
-		arrRect.print();
+		arrRect.Print();
 	};
 
 	command removeIfEqualN = [&]() {
