@@ -15,6 +15,7 @@ public:
 	void ElementDelete(size_t index);
 	TArrayItem<T>& ElementGet(size_t index);
 	int Size();
+	void print();
 	template <class A> friend std::ostream& operator <<(std::ostream& os, const TArray<A>& arr);
 	TIterator<TArrayItem<T>, T> begin();
 	TIterator<TArrayItem<T>, T> end();
