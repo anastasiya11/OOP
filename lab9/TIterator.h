@@ -1,43 +1,33 @@
 #pragma once
-
-#include "stdafx.h"
 #include <memory>
 #include <iostream>
-
-template <class N, class T>
+template <class node, class T>
 class TIterator
 {
 public:
-	TIterator(std::shared_ptr<N> n) {
-		cur = n;
+	TIterator(node * n) {
+		node_ptr = n;
 	}
-
-	std::shared_ptr<T> operator* () {
-		return cur->getFigure();
+	node * operator * () {
+		return node_ptr;
 	}
-
-	std::shared_ptr<T> operator-> () {
-		return cur->getFigure();
+	std::shared_ptr<node> operator -> () {
+		return node_ptr;
 	}
-
-	void operator++() {
-		cur = cur->getNext();
+	void operator ++ () {
+		node_ptr = (node_ptr->GetNext());
 	}
-
-	TIterator operator++ (int) {
-		TIterator cur(*this);
+	TIterator operator ++ (int) {
+		TIterator iter(*this);
 		++(*this);
-		return cur;
+		return iter;
 	}
-
-	bool operator== (const TIterator &i) {
-		return (cur == i.cur);
+	bool operator == (TIterator const& i) {
+		return node_ptr == i.node_ptr;
 	}
-
-	bool operator!= (const TIterator &i) {
-		return (cur != i.cur);
+	bool operator != (TIterator const& i) {
+		return !(*this == i);
 	}
-
 private:
-	std::shared_ptr<N> cur;
+	node * node_ptr;
 };
